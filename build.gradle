@@ -1,7 +1,10 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+}
+
 group 'org.iotlabs'
 version '0.1-SNAPSHOT'
-
-apply plugin: 'java'
 
 sourceCompatibility = 1.8
 
@@ -18,4 +21,17 @@ dependencies {
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.7'
     compile 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.0.2'
     compile 'com.google.code.gson:gson:2.7'
+}
+
+jacoco {
+    toolVersion = "0.7.6.201602180812"
+}
+jacocoTestReport  {
+    group = "Reporting"
+    description = "Generate Jacoco coverage reports after running tests."
+    reports {
+        xml{
+            enabled true
+        }
+    }
 }
