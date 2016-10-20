@@ -12,4 +12,4 @@ script: ./gradlew check
 test:
     post:
         - if [ -e ./gradlew ]; then ./gradlew jacocoTestReport;else gradle jacocoTestReport;fi
-        - bash <(curl -s https://codecov.io/bash) -t 37118203-a8df-40d6-b75e-81f9d4c279de
+        - bash <(curl -s https://codecov.io/bash)
