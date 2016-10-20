@@ -35,3 +35,5 @@ jacocoTestReport  {
         }
     }
 }
+
+check.dependsOn jacocoTestReport
