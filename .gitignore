@@ -11,6 +11,8 @@
 /build/
 *.properties
 
+*.jar
+
 # mqtt
 .lck
 *.mapdb
