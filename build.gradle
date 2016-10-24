@@ -23,6 +23,11 @@ dependencies {
     compile 'com.google.code.gson:gson:2.7'
 }
 
+
+tasks.withType(Jar) {
+    destinationDir = file("$rootDir/")
+}
+
 jacoco {
     toolVersion = "0.7.6.201602180812"
 }
