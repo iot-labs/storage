@@ -36,14 +36,16 @@ task makejar (type: Jar) {
 }
 
 uploadArchives {
-    repositories {
-        mavenDeployer {
-            repository(url: "http://13.76.209.35:8081/nexus/content/repositories/dev/") {
-                authentication(userName: "$mavenUser", password: "$mavenPassword")
+    if (project.hasProperty("mavenUser")) {
+        repositories {
+            mavenDeployer {
+                repository(url: "http://13.76.209.35:8081/nexus/content/repositories/dev/") {
+                    authentication(userName: "$mavenUser", password: "$mavenPassword")
+                }
+                pom.version = "${project.version}"
+                pom.artifactId = "${project.name}"
+                pom.groupId = "org.iotlabs"
             }
-            pom.version = "${project.version}"
-            pom.artifactId = "${project.name}"
-            pom.groupId = "org.iotlabs"
         }
     }
 }
