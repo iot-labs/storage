@@ -1,10 +1,11 @@
 plugins {
     id 'java'
     id 'jacoco'
+    id 'maven'
 }
 
 group 'org.iotlabs'
-version '0.1-SNAPSHOT'
+version '0.0.2'
 
 sourceCompatibility = 1.8
 
@@ -12,6 +13,10 @@ repositories {
     mavenCentral()
     maven {
         url "https://repo.eclipse.org/content/repositories/paho-snapshots/"
+    }
+    // for Iot Labs repository
+    maven {
+        url "http://13.76.209.35:8081/nexus/content/repositories/dev/"
     }
 }
 
@@ -28,6 +33,19 @@ task makejar (type: Jar) {
     destinationDir = file("$rootDir/")
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "http://13.76.209.35:8081/nexus/content/repositories/dev/") {
+                authentication(userName: "$mavenUser", password: "$mavenPassword")
+            }
+            pom.version = "${project.version}"
+            pom.artifactId = "${project.name}"
+            pom.groupId = "org.iotlabs"
+        }
+    }
 }
 
 jacoco {
